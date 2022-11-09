@@ -132,21 +132,13 @@ export function flipHorizontal(pose, minConfidence, canvasWidth) {
     return pose;
 }
 
-export function updateArmAngle(pose, tolerance, O, A, B) {
+export function updateAngle(pose, tolerance, O, A, B) {
     let keypoints = pose[0]["keypoints"]
-    /*
-    rightWrist = poses[0].keypoints[10];
-    rightShoulder = poses[0].keypoints[6];
-    rightElbow = poses[0].keypoints[8];
-    */
 
     let Pivot = keypoints[partNames.indexOf(O)];
     let PointA = keypoints[partNames.indexOf(A)];
     let PointB = keypoints[partNames.indexOf(B)];
-    // console.log(partNames.indexOf(A))
-    // let leftWrist = keypoints[9];
-    // let leftShoulder = keypoints[5];
-    // let leftElbow = keypoints[7];
+
     if (!PointA || !PointB || !Pivot) {
         return
     }
@@ -161,18 +153,12 @@ export function updateArmAngle(pose, tolerance, O, A, B) {
         )
     ) * (180 / Math.PI);
 
-    if (angle < 0) {
-        //angle = angle + 360;
-    }
+    // if (angle < 0) {
+    //     angle = angle + 360;
+    // }
 
     if (PointA.score > tolerance && Pivot.score > tolerance && PointB.score > tolerance) {
-        console.log(angle);
-        let elbowAngle = angle;
+        // console.log(angle);
+        return angle;
     }
-    else {
-        //console.log('Cannot see elbow');
-    }
-
-    // Use this function and pass 3 extra arguments, 'leftWrist' 'leftShoulder & 'leftElbow'
-
 }
